@@ -4,9 +4,9 @@ package archive
 import (
 	"archive/tar"
 	"compress/gzip"
-	"path/filepath"
 	"io"
 	"os"
+	"path/filepath"
 )
 
 func Extract(src, dest string) error {
@@ -65,11 +65,11 @@ func extractTar(header *tar.Header, dest string, input io.Reader) error {
 		return err
 	}
 
-	if info.Mode() & os.ModeSymlink != 0 {
+	if info.Mode()&os.ModeSymlink != 0 {
 		return os.Symlink(header.Linkname, path)
 	}
 
-	file, err := os.OpenFile(path, os.O_RDWR | os.O_CREATE | os.O_TRUNC, info.Mode())
+	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_TRUNC, info.Mode())
 
 	if err != nil {
 		return err
