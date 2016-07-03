@@ -4,12 +4,13 @@ package archive
 import (
 	"archive/tar"
 	"compress/gzip"
+  "path/filepath"
+
 	"io"
 	"os"
-	"path/filepath"
 )
 
-func Extract(src, dest string) error {
+func Extract(src string, dest string) error {
 	open, err := os.Open(src)
 
 	if err != nil {
