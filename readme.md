@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/markelog/archive.svg?branch=master)](https://travis-ci.org/markelog/archive)
+
 # Archive
 
 Simple tarball extraction.
