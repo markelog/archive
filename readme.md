@@ -20,13 +20,11 @@ package main
 import "github.com/markelog/archive"
 
 func main() {
-  var err error
-
   // Will extract sexy turtles to current dir
-  err := archive.Extract("/sexy-turtles.tar.gz", ".")
+  archive.Extract("/sexy-turtles.tar.gz", ".")
 
   // Will extract gangsta panda to current dir
-  err = archive.Extract("/gangsta-panda.zip", ".")
+  archive.Extract("/gangsta-panda.zip", ".")
 }
-```
+
 ```
