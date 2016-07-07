@@ -1,4 +1,4 @@
-[![GoDoc](https://godoc.org/github.com/markelog/archive?status.svg)](https://godoc.org/github.com/markelog/archive) [![Build Status](https://travis-ci.org/markelog/archive.svg)](https://travis-ci.org/markelog/archive) [![Go Report Card](https://goreportcard.com/badge/github.com/markelog/archive)](https://goreportcard.com/report/github.com/markelog/archive)
+[![Build Status](https://travis-ci.org/markelog/archive.svg)](https://travis-ci.org/markelog/archive) [![GoDoc](https://godoc.org/github.com/markelog/archive?status.svg)](https://godoc.org/github.com/markelog/archive) [![Go Report Card](https://goreportcard.com/badge/github.com/markelog/archive)](https://goreportcard.com/report/github.com/markelog/archive)
 
 # Archive
 
