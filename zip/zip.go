@@ -1,4 +1,4 @@
-// Simple zip extraction
+// Package zip extracts zips
 package zip
 
 import (
@@ -9,10 +9,12 @@ import (
 	"path/filepath"
 )
 
+// Mimetype of the tgz
 var (
 	Type = "application/zip"
 )
 
+// Extract zip archive
 func Extract(src string, dest string) error {
 	files, err := zip.OpenReader(src)
 

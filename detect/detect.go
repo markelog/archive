@@ -1,3 +1,4 @@
+// Package detect detects mimetypes
 package detect
 
 import (
@@ -5,6 +6,7 @@ import (
 	"os"
 )
 
+// Detect mimetype
 func Detect(src string) (string, error) {
 	file, err := os.Open(src)
 	if err != nil {

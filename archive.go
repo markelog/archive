@@ -1,4 +1,4 @@
-// Simple archive extraction
+// Package archive for simple archive extraction
 package archive
 
 import (
@@ -7,6 +7,7 @@ import (
 	"github.com/markelog/archive/zip"
 )
 
+// Extract archives
 func Extract(src string, dest string) error {
 	mime, err := detect.Detect(src)
 
