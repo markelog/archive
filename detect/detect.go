@@ -1,25 +1,25 @@
 package detect
 
 import (
-  "net/http"
-  "os"
+	"net/http"
+	"os"
 )
 
 func Detect(src string) (string, error) {
-  file, err := os.Open(src)
-  if err != nil {
-    return "", err
-  }
+	file, err := os.Open(src)
+	if err != nil {
+		return "", err
+	}
 
-  defer file.Close()
+	defer file.Close()
 
-  data := make([]byte, 512)
+	data := make([]byte, 512)
 
-  _, err = file.Read(data)
+	_, err = file.Read(data)
 
-  if err != nil {
-    return "", err
-  }
+	if err != nil {
+		return "", err
+	}
 
-  return http.DetectContentType(data), nil
+	return http.DetectContentType(data), nil
 }
