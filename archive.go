@@ -1,88 +1,29 @@
-// Simple tarball extraction
+// Simple archive extraction
 package archive
 
 import (
-	"archive/tar"
-	"compress/gzip"
-  "path/filepath"
-
-	"io"
-	"os"
+  "github.com/markelog/archive/detect"
+  "github.com/markelog/archive/tgz"
+  "github.com/markelog/archive/zip"
 )
 
 func Extract(src string, dest string) error {
-	open, err := os.Open(src)
+  mime, err := detect.Detect(src)
 
-	if err != nil {
-		return err
-	}
+  if err != nil {
+    return err
+  }
 
-	defer open.Close()
+  switch mime {
+    case tgz.Type:
+      err = tgz.Extract(src, dest)
+    case zip.Type:
+      err = zip.Extract(src, dest)
+  }
 
-	reader, _ := gzip.NewReader(open)
-	defer reader.Close()
+  if err != nil {
+    return err
+  }
 
-	tarReader := tar.NewReader(reader)
-
-	for {
-		header, err := tarReader.Next()
-
-		if err == io.EOF {
-			break
-		}
-
-		if err != nil {
-			return err
-		}
-
-		if header.Name == "." {
-			continue
-		}
-
-		err = extractTar(header, dest, tarReader)
-		if err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func extractTar(header *tar.Header, dest string, input io.Reader) error {
-	path := filepath.Join(dest, header.Name)
-	info := header.FileInfo()
-
-	if info.IsDir() {
-		err := os.MkdirAll(path, info.Mode())
-		if err != nil {
-			return err
-		}
-
-		return nil
-	}
-
-	err := os.MkdirAll(filepath.Dir(path), 0755)
-	if err != nil {
-		return err
-	}
-
-	if info.Mode()&os.ModeSymlink != 0 {
-		return os.Symlink(header.Linkname, path)
-	}
-
-	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE|os.O_TRUNC, info.Mode())
-
-	if err != nil {
-		return err
-	}
-
-	defer file.Close()
-
-	_, err = io.Copy(file, input)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
+  return nil
 }

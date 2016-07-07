@@ -1,79 +1,136 @@
 package archive_test
 
 import (
-	"fmt"
-	"io/ioutil"
-	"os"
+  "fmt"
+  "io/ioutil"
+  "os"
 
-	"path/filepath"
+  "path/filepath"
 
-	. "github.com/markelog/archive"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+  . "github.com/markelog/archive"
+  . "github.com/onsi/ginkgo"
+  . "github.com/onsi/gomega"
 )
 
 func isExist(src string) bool {
-	_, err := os.Stat(src)
-	return err == nil
+  _, err := os.Stat(src)
+  return err == nil
 }
 
 var _ = Describe("Archive", func() {
-	pwd, _ := os.Getwd()
-	file := fmt.Sprintf("%v/testdata/file.tar.gz", pwd)
-	folder := fmt.Sprintf("%v/testdata/folder.tar.gz", pwd)
-	var (
-		tmpFolder string
-	)
+  pwd, _ := os.Getwd()
 
-	Describe("Extract tar.gz", func() {
-		BeforeEach(func() {
-			tmpFolder, _ = ioutil.TempDir("", "tmp")
-		})
+  tgzFile := fmt.Sprintf("%v/testdata/file.tar.gz", pwd)
+  tgzFolder := fmt.Sprintf("%v/testdata/folder.tar.gz", pwd)
 
-		AfterEach(func() {
-			os.Remove(tmpFolder)
-		})
+  zipFile := fmt.Sprintf("%v/testdata/file.zip", pwd)
+  zipFolder := fmt.Sprintf("%v/testdata/folder.zip", pwd)
 
-		Describe("file", func() {
-			var (
-				path string
-			)
+  var (
+    tmpFolder string
+  )
 
-			BeforeEach(func() {
-				Extract(file, tmpFolder)
-				path = filepath.Join(tmpFolder, "1")
-			})
+  Describe("Extract tar.gz", func() {
+    BeforeEach(func() {
+      tmpFolder, _ = ioutil.TempDir("", "tmp")
+    })
 
-			It("should exist", func() {
-				Expect(isExist(path)).To(Equal(true))
-			})
+    AfterEach(func() {
+      os.Remove(tmpFolder)
+    })
 
-			It("should get file content", func() {
-				data, _ := ioutil.ReadFile(path)
+    Describe("file", func() {
+      var (
+        path string
+      )
 
-				Expect(string(data)).To(Equal("test\n"))
-			})
-		})
+      BeforeEach(func() {
+        Extract(tgzFile, tmpFolder)
+        path = filepath.Join(tmpFolder, "file")
+      })
 
-		Describe("folder", func() {
-			var (
-				path string
-			)
+      It("should exist", func() {
+        Expect(isExist(path)).To(Equal(true))
+      })
 
-			BeforeEach(func() {
-				Extract(folder, tmpFolder)
-				path = filepath.Join(tmpFolder, "test")
-			})
+      It("should get file content", func() {
+        data, _ := ioutil.ReadFile(path)
 
-			It("should exist", func() {
-				Expect(isExist(path)).To(Equal(true))
-			})
+        Expect(string(data)).To(Equal("test\n"))
+      })
+    })
 
-			It("should get folder content", func() {
-				data, _ := ioutil.ReadFile(path + "/1")
+    Describe("folder", func() {
+      var (
+        path string
+      )
 
-				Expect(string(data)).To(Equal("test\n"))
-			})
-		})
-	})
+      BeforeEach(func() {
+        Extract(tgzFolder, tmpFolder)
+        path = filepath.Join(tmpFolder, "folder")
+      })
+
+      It("should exist", func() {
+        Expect(isExist(path)).To(Equal(true))
+      })
+
+      It("should get folder content", func() {
+        data, _ := ioutil.ReadFile(path + "/file")
+
+        Expect(string(data)).To(Equal("test\n"))
+      })
+    })
+  })
+
+  Describe("Extract zip", func() {
+    BeforeEach(func() {
+      tmpFolder, _ = ioutil.TempDir("", "tmp")
+    })
+
+    AfterEach(func() {
+      os.Remove(tmpFolder)
+    })
+
+    Describe("file", func() {
+      var (
+        path string
+      )
+
+      BeforeEach(func() {
+        Extract(zipFile, tmpFolder)
+        path = filepath.Join(tmpFolder, "file")
+      })
+
+      It("should exist", func() {
+        Expect(isExist(path)).To(Equal(true))
+      })
+
+      It("should get file content", func() {
+        data, _ := ioutil.ReadFile(path)
+
+        Expect(string(data)).To(Equal("test\n"))
+      })
+    })
+
+    Describe("folder", func() {
+      var (
+        path string
+      )
+
+      BeforeEach(func() {
+        Extract(zipFolder, tmpFolder)
+        path = filepath.Join(tmpFolder, "folder")
+      })
+
+      It("should exist", func() {
+        Expect(isExist(path)).To(Equal(true))
+      })
+
+      It("should get folder content", func() {
+        data, _ := ioutil.ReadFile(path + "/file")
+
+        Expect(string(data)).To(Equal("test\n"))
+      })
+    })
+  })
 })

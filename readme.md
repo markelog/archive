@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/markelog/archive.svg?branch=master)](https://travis-ci.org/markelog/archive)
+[![GoDoc](https://godoc.org/github.com/markelog/archive?status.svg)](https://godoc.org/github.com/markelog/archive) [![Build Status](https://travis-ci.org/markelog/archive.svg)](https://travis-ci.org/markelog/archive) [![Go Report Card](https://goreportcard.com/badge/github.com/markelog/archive)](https://goreportcard.com/report/github.com/markelog/archive)
 
 # Archive
 
-Simple tarball extraction.
+Simple archive (tarball and zip) extraction.
 
 Check the [docs](http://godoc.org/github.com/markelog/archive)
 
@@ -20,7 +20,13 @@ package main
 import "github.com/markelog/archive"
 
 func main() {
+  var err error
+
   // Will extract sexy turtles to current dir
-  archive.Extract("/sexy-turtles.tar.gz", ".")
+  err := archive.Extract("/sexy-turtles.tar.gz", ".")
+
+  // Will extract gangsta panda to current dir
+  err = archive.Extract("/gangsta-panda.zip", ".")
 }
+```
 ```
