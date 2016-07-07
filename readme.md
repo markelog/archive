@@ -4,8 +4,6 @@
 
 Simple archive (tarball and zip) extraction.
 
-Check the [docs](http://godoc.org/github.com/markelog/archive)
-
 ## Installation
 
 ```
@@ -26,5 +24,4 @@ func main() {
   // Will extract gangsta panda to current dir
   archive.Extract("/gangsta-panda.zip", ".")
 }
-
 ```
