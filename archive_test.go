@@ -26,9 +26,18 @@ var _ = Describe("Archive", func() {
 	zipFile := fmt.Sprintf("%v/testdata/file.zip", pwd)
 	zipFolder := fmt.Sprintf("%v/testdata/folder.zip", pwd)
 
+	unknownFile := fmt.Sprintf("%v/testdata/file", pwd)
+
 	var (
 		tmpFolder string
 	)
+
+	Describe("Unknown format", func() {
+		It("should return error for unknown format", func() {
+			err := Extract(unknownFile, "")
+			Expect(err).Should(MatchError("Format is not supported"))
+		})
+	})
 
 	Describe("Extract tar.gz", func() {
 		BeforeEach(func() {

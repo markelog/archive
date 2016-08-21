@@ -2,6 +2,8 @@
 package archive
 
 import (
+	"errors"
+
 	"github.com/markelog/archive/detect"
 	"github.com/markelog/archive/tgz"
 	"github.com/markelog/archive/zip"
@@ -20,6 +22,8 @@ func Extract(src string, dest string) error {
 		err = tgz.Extract(src, dest)
 	case zip.Type:
 		err = zip.Extract(src, dest)
+	default:
+		err = errors.New("Format is not supported")
 	}
 
 	if err != nil {
