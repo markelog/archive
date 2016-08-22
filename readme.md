@@ -1,8 +1,6 @@
-[![Build Status](https://travis-ci.org/markelog/archive.svg)](https://travis-ci.org/markelog/archive) [![GoDoc](https://godoc.org/github.com/markelog/archive?status.svg)](https://godoc.org/github.com/markelog/archive) [![Go Report Card](https://goreportcard.com/badge/github.com/markelog/archive)](https://goreportcard.com/report/github.com/markelog/archive)
+# Archive [![Build Status](https://travis-ci.org/markelog/archive.svg)](https://travis-ci.org/markelog/archive) [![GoDoc](https://godoc.org/github.com/markelog/archive?status.svg)](https://godoc.org/github.com/markelog/archive) [![Go Report Card](https://goreportcard.com/badge/github.com/markelog/archive)](https://goreportcard.com/report/github.com/markelog/archive)
 
-# Archive
-
-Simple archive (tarball and zip) extraction.
+> Simple archive (gzip/zip/bzip2) extraction
 
 ## Installation
 
@@ -23,5 +21,8 @@ func main() {
 
   // Will extract gangsta panda to current dir
   archive.Extract("/gangsta-panda.zip", ".")
+
+  // Will extract killa gorilla to current dir
+  archive.Extract("/killa-gorilla.tar.bz2", ".")
 }
 ```
