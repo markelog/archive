@@ -2,12 +2,23 @@
 package detect
 
 import (
+	"strings"
 	"net/http"
 	"os"
 )
 
+func isbz2(src string) bool {
+	return strings.HasSuffix(src, "bz2")
+}
+
 // Detect mimetype
 func Detect(src string) (string, error) {
+	// Apparently, golang can't detect bzip mimetype :/
+
+	if isbz2(src) {
+		return "application/x-bzip2", nil
+	}
+
 	file, err := os.Open(src)
 	if err != nil {
 		return "", err
