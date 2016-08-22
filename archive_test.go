@@ -20,8 +20,8 @@ func isExist(src string) bool {
 var _ = Describe("Archive", func() {
 	pwd, _ := os.Getwd()
 
-	tgzFile := fmt.Sprintf("%v/testdata/file.tar.gz", pwd)
-	tgzFolder := fmt.Sprintf("%v/testdata/folder.tar.gz", pwd)
+	gzipFile := fmt.Sprintf("%v/testdata/file.tar.gz", pwd)
+	gzipFolder := fmt.Sprintf("%v/testdata/folder.tar.gz", pwd)
 
 	zipFile := fmt.Sprintf("%v/testdata/file.zip", pwd)
 	zipFolder := fmt.Sprintf("%v/testdata/folder.zip", pwd)
@@ -161,7 +161,7 @@ var _ = Describe("Archive", func() {
 			)
 
 			BeforeEach(func() {
-				Extract(tgzFile, tmpFolder)
+				Extract(gzipFile, tmpFolder)
 				path = filepath.Join(tmpFolder, "file")
 			})
 
@@ -182,7 +182,7 @@ var _ = Describe("Archive", func() {
 			)
 
 			BeforeEach(func() {
-				Extract(tgzFolder, tmpFolder)
+				Extract(gzipFolder, tmpFolder)
 				path = filepath.Join(tmpFolder, "folder")
 			})
 

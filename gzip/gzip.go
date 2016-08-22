@@ -1,5 +1,5 @@
-// Package tgz extracts tarballs
-package tgz
+// Package gzip extracts gzips
+package gzip
 
 import (
 	"archive/tar"
@@ -15,7 +15,7 @@ var (
 	Type = "application/x-gzip"
 )
 
-// Extract tarballs
+// Extract gzip
 func Extract(src string, dest string) error {
 	file, err := os.Open(src)
 

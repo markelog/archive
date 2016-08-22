@@ -6,7 +6,7 @@ import (
 
 	"github.com/markelog/archive/detect"
 
-	"github.com/markelog/archive/tgz"
+	"github.com/markelog/archive/gzip"
 	"github.com/markelog/archive/zip"
 	"github.com/markelog/archive/bz2"
 )
@@ -20,8 +20,8 @@ func Extract(src string, dest string) error {
 	}
 
 	switch mime {
-	case tgz.Type:
-		err = tgz.Extract(src, dest)
+	case gzip.Type:
+		err = gzip.Extract(src, dest)
 	case zip.Type:
 		err = zip.Extract(src, dest)
 	case bz2.Type:

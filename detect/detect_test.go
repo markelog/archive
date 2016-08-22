@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/markelog/archive/tgz"
+	"github.com/markelog/archive/gzip"
 	"github.com/markelog/archive/zip"
 	"github.com/markelog/archive/bz2"
 
@@ -16,7 +16,7 @@ import (
 
 var _ = Describe("Detect", func() {
 	pwd, _ := os.Getwd()
-	tgzPath := fmt.Sprintf("%v/../testdata/file.tar.gz", pwd)
+	gzipPath := fmt.Sprintf("%v/../testdata/file.tar.gz", pwd)
 	zipPath := fmt.Sprintf("%v/../testdata/file.zip", pwd)
 	bz2Path := fmt.Sprintf("%v/../testdata/file.tar.bz2", pwd)
 
@@ -27,9 +27,9 @@ var _ = Describe("Detect", func() {
 	})
 
 	It("detects tar.gz", func() {
-		result, _ := Detect(tgzPath)
+		result, _ := Detect(gzipPath)
 
-		Expect(result).To(Equal(tgz.Type))
+		Expect(result).To(Equal(gzip.Type))
 	})
 
 	It("detects zip", func() {
