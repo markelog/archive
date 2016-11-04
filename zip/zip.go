@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 )
 
-// Mimetype of the tgz
 var (
+	// Zip mimetype
 	Type = "application/zip"
 )
 

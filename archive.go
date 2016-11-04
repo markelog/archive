@@ -6,9 +6,9 @@ import (
 
 	"github.com/markelog/archive/detect"
 
+	"github.com/markelog/archive/bz2"
 	"github.com/markelog/archive/gzip"
 	"github.com/markelog/archive/zip"
-	"github.com/markelog/archive/bz2"
 )
 
 // Extract archives
